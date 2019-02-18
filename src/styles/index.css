@@ -1,0 +1,91 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+.container {
+    background: url("../img/background.svg") 0 0 no-repeat;
+    background-size: cover;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+}
+.favourite-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.favourite-message, .volume-message {
+    background-color: rgb(215, 215,215);
+    border-radius: 3px;
+    font-family: "Arial", sans-serif;
+    color: rgb(101,101,101);
+    padding: 4px 16px;
+    text-align: center;
+}
+.favourite-heart {
+    background: url("../icons/heart.svg") center no-repeat;
+    background-size: contain;
+    height: 32px;
+    width: 32px;
+}
+.player-container {
+    background: url("../icons/background.png") center no-repeat;
+    background-color: #fff;
+    background-size: cover;
+    border-radius: 50%;
+    height: 250px;
+    margin: 0 30px;
+    position: relative;
+    width: 250px;
+}
+.controls {
+    align-items: center;
+    background-color: rgba(0, 0, 0, .9);
+    border-radius: 4px;
+    display: flex;
+    height: 60px;
+    justify-content: center;
+    left: 14px;
+    position: absolute;
+    top: calc(50% - 30px);
+    width: calc(100% - 28px);
+}
+.control-button {
+    cursor: pointer;
+    height: 38px;
+    margin: 0 8px;
+    width: 38px;
+}
+#play-pause {
+    background: url("../icons/pause.svg") 0 0 no-repeat;
+    background-size: contain;
+
+}
+#prev {
+    background: url("../icons/prev.svg") 0 0 no-repeat;
+    background-size: contain;
+}
+#next {
+    background: url("../icons/prev.svg") 0 0 no-repeat;
+    background-size: contain;
+    transform: rotate(180deg);
+}
+.volume-container {
+    display: flex;
+}
+.volume-icon {
+    background: url("../icons/volume.svg") 0 0 no-repeat;
+    background-size: contain;
+    height: 32px;
+    margin: 8px auto;
+    width: 32px;
+}
+#volume-slider {
+    transform: rotate(-90deg);
+}
+.volume-message {
+    width: 80px;
+}
