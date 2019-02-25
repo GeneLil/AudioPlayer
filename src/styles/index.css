@@ -59,10 +59,13 @@
     margin: 0 8px;
     width: 38px;
 }
-#play-pause {
+#play-pause.play {
+    background: url("../icons/play.svg") 0 0 no-repeat;
+    background-size: contain;
+}
+#play-pause.pause {
     background: url("../icons/pause.svg") 0 0 no-repeat;
     background-size: contain;
-
 }
 #prev {
     background: url("../icons/prev.svg") 0 0 no-repeat;

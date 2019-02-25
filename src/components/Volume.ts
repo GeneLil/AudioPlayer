@@ -1,9 +1,12 @@
 import { Component } from "./Component"
+import { Audio } from "./Audio"
 
 export class Volume extends Component {
   private volume: number
-  constructor() {
+  private audio: Audio
+  constructor(audio: Audio) {
     super()
+    this.audio = audio
     this.volume = 40
     this.addClass("volume-container")
     this.render()
@@ -16,6 +19,7 @@ export class Volume extends Component {
 
   onVolumeChange(e: any) {
     this.volume = e.target.value
+    this.audio.setVolume(this.volume)
     this.setMessageText()
   }
 

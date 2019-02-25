@@ -1,7 +1,9 @@
 import { Component } from "./Component"
+import { Audio } from "./Audio"
 
 export class ProgressBar extends Component {
   public canvas = document.createElement("canvas") as HTMLCanvasElement
+  private audio: Audio
 
   private context = this.canvas.getContext("2d")
   private amountLoaded: number = 0
@@ -12,17 +14,38 @@ export class ProgressBar extends Component {
 
   private timer: any
 
-  constructor() {
+  constructor(audio: Audio, rootElem: HTMLDivElement) {
     super()
+    this.audio = audio
     this.canvas.width = 260
     this.canvas.height = 260
-    if (this.canvas) {
-      this.startProgress()
+    rootElem.appendChild(this.canvas)
+    this.drawBackground()
+  }
+
+  drawBackground() {
+    const { context } = this
+    if (context) {
+      context.beginPath()
+      context.arc(
+        this.canvasWidth,
+        this.canvasHeight,
+        120,
+        0,
+        2 * Math.PI,
+        false
+      )
+      context.strokeStyle = "#000"
+      context.lineWidth = 10
+      context.stroke()
     }
   }
 
   startProgress() {
-    this.timer = setInterval(this.progress.bind(this), 50)
+    this.timer = setInterval(
+      this.progress.bind(this),
+      (this.audio.duration / 100) * 1000
+    )
   }
 
   endProgress() {
@@ -34,21 +57,10 @@ export class ProgressBar extends Component {
     this.diff = (this.amountLoaded / 100) * Math.PI * 2
     if (context) {
       context.clearRect(0, 0, 260, 260)
-      context.beginPath()
-      context.arc(
-        this.canvasWidth,
-        this.canvasHeight,
-        120,
-        0,
-        2 * Math.PI,
-        false
-      )
-      context.strokeStyle = "#000"
-      context.stroke()
+      this.drawBackground()
       context.strokeStyle = "rgb(0, 120, 200)"
       context.lineWidth = 10
       context.beginPath()
-
       context.arc(
         this.canvasWidth,
         this.canvasHeight,
