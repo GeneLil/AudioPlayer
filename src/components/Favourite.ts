@@ -6,9 +6,10 @@ export class Favourite extends Component {
     this.addClass("favourite-container")
     this.render()
   }
+
   render() {
     this.element.innerHTML = `
-      <div class="favourite-message">Favourited</div>
+      <div class="favourite-message">Favourite</div>
       <div class="favourite-heart"></div>
     `
   }

@@ -1,20 +1,18 @@
 import { Component } from "./Component"
 import { Audio } from "./Audio"
+import { ProgressBar } from "./ProgressBar"
 
 export class Controls extends Component {
   private audio: Audio
-  onPlay: () => void
-  onPause: () => void
+  private progressBar: ProgressBar
   constructor(
     audio: Audio,
     rootElement: HTMLDivElement,
-    onPlay: () => void,
-    onPause: () => void
+    progressBar: ProgressBar
   ) {
     super()
     this.audio = audio
-    this.onPause = onPause
-    this.onPlay = onPlay
+    this.progressBar = progressBar
     this.addClass("controls")
     this.render()
     rootElement.appendChild(this.element)
@@ -25,6 +23,14 @@ export class Controls extends Component {
     if (playBtn) {
       playBtn.addEventListener("click", this.playPause.bind(this))
     }
+    const playNextBtn = this.element.querySelector("#next")
+    if (playNextBtn) {
+      playNextBtn.addEventListener("click", this.playNextTrack.bind(this))
+    }
+    const playPrevBtn = this.element.querySelector("#prev")
+    if (playPrevBtn) {
+      playPrevBtn.addEventListener("click", this.playPreviousTrack.bind(this))
+    }
   }
   playPause(e: any) {
     const playBtn = e.target
@@ -32,13 +38,21 @@ export class Controls extends Component {
       this.audio.pause()
       playBtn.classList.add("play")
       playBtn.classList.remove("pause")
-      this.onPause()
+      this.progressBar.endProgress()
     } else {
       this.audio.play()
       playBtn.classList.add("pause")
       playBtn.classList.remove("play")
-      this.onPlay()
+      this.progressBar.startProgress()
     }
+  }
+  playNextTrack() {
+    this.audio.playNextTrack()
+    this.progressBar.resetProgress()
+  }
+  playPreviousTrack() {
+    this.audio.playPreviousTrack()
+    this.progressBar.resetProgress()
   }
   render() {
     this.element.innerHTML = `

@@ -10,9 +10,17 @@ export class Container extends Component {
     this.render()
   }
   render() {
-    const audio = new Audio(
+    const audio = new Audio()
+    audio.addTrackToList(
       "https://cdn.jsdelivr.net/gh/lexytail/first-phaser/assets/music.mp3"
     )
+    audio.addTrackToList(
+      "http://www.largesound.com/ashborytour/sound/brobob.mp3"
+    )
+    audio.addTrackToList(
+      "http://www.largesound.com/ashborytour/sound/AshboryBYU.mp3"
+    )
+
     const favourite = new Favourite()
     const playerContainer = new PlayerContainer(audio)
     const volume = new Volume(audio)

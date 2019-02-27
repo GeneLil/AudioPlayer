@@ -52,6 +52,17 @@ export class ProgressBar extends Component {
     clearInterval(this.timer)
   }
 
+  resetProgress() {
+    const { context } = this
+    if (context) {
+      context.clearRect(0, 0, 260, 260)
+      this.drawBackground()
+    }
+    this.amountLoaded = 0
+    this.endProgress()
+    this.startProgress()
+  }
+
   progress() {
     const { context } = this
     this.diff = (this.amountLoaded / 100) * Math.PI * 2
