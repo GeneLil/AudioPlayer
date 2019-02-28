@@ -15,9 +15,6 @@ export class Audio {
   initializeTrack() {
     this.trackDuration = this.playList[this.currentTrackIndex].duration
   }
-  isPaused() {
-    return this.playList[this.currentTrackIndex].paused
-  }
   play() {
     this.playList[this.currentTrackIndex].play()
   }
@@ -49,8 +46,8 @@ export class Audio {
   get duration() {
     return this.playList[this.currentTrackIndex].duration
   }
-  get currentTrack() {
-    return this.playList[this.currentTrackIndex]
+  get isPaused() {
+    return this.playList[this.currentTrackIndex].paused
   }
   setVolume(volumeLevel: number) {
     this.playList[this.currentTrackIndex].volume = volumeLevel / 100

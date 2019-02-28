@@ -3,12 +3,10 @@ import { Audio } from "./Audio"
 import { ProgressBar } from "./ProgressBar"
 
 export class Controls extends Component {
-  private audio: Audio
-  private progressBar: ProgressBar
   constructor(
-    audio: Audio,
-    rootElement: HTMLDivElement,
-    progressBar: ProgressBar
+    private audio: Audio,
+    private progressBar: ProgressBar,
+    rootElement: HTMLDivElement
   ) {
     super()
     this.audio = audio
@@ -34,7 +32,7 @@ export class Controls extends Component {
   }
   playPause(e: any) {
     const playBtn = e.target
-    if (!this.audio.isPaused()) {
+    if (!this.audio.isPaused) {
       this.audio.pause()
       playBtn.classList.add("play")
       playBtn.classList.remove("pause")

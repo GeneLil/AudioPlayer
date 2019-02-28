@@ -3,8 +3,6 @@ import { Audio } from "./Audio"
 
 export class ProgressBar extends Component {
   public canvas = document.createElement("canvas") as HTMLCanvasElement
-  private audio: Audio
-
   private context = this.canvas.getContext("2d")
   private amountLoaded: number = 0
   private startFrom: number = 4.72
@@ -14,7 +12,7 @@ export class ProgressBar extends Component {
 
   private timer: any
 
-  constructor(audio: Audio, rootElem: HTMLDivElement) {
+  constructor(private audio: Audio, rootElem: HTMLDivElement) {
     super()
     this.audio = audio
     this.canvas.width = 260

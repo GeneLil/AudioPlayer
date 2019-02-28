@@ -9,7 +9,7 @@ export class PlayerContainer extends Component {
   constructor(audio: Audio) {
     super()
     this.progressBar = new ProgressBar(audio, this.element)
-    this.controls = new Controls(audio, this.element, this.progressBar)
+    this.controls = new Controls(audio, this.progressBar, this.element)
     this.addClass("player-container")
   }
 }

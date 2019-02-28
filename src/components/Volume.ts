@@ -3,8 +3,7 @@ import { Audio } from "./Audio"
 
 export class Volume extends Component {
   private volume: number
-  private audio: Audio
-  constructor(audio: Audio) {
+  constructor(private audio: Audio) {
     super()
     this.audio = audio
     this.volume = 40
