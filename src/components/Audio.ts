@@ -1,55 +1,60 @@
+import { Track } from "./tracks"
+
 export class Audio {
-  public playList: HTMLAudioElement[] = []
-  private trackDuration: number = 0
+  public playList: Track[] = []
   public currentTrackIndex: number = 0
 
-  constructor() {}
-
-  addTrackToList(source: string) {
-    const newTrack: HTMLAudioElement = document.createElement("audio")
-    newTrack.src = source
-    this.playList.push(newTrack)
-    newTrack.preload = "metadata"
-    newTrack.addEventListener("loadedmetadata", this.initializeTrack.bind(this))
-  }
-  initializeTrack() {
-    this.trackDuration = this.playList[this.currentTrackIndex].duration
+  addTrackToList(audioTrack: Track) {
+    this.playList.push(audioTrack)
+    audioTrack.audioElement.src = audioTrack.src
+    audioTrack.audioElement.preload = "metadata"
+    audioTrack.audioElement.addEventListener("loadedmetadata", () => {
+      audioTrack.trackDuration = audioTrack.audioElement.duration
+    })
   }
   play() {
-    this.playList[this.currentTrackIndex].play()
+    this.playList[this.currentTrackIndex].audioElement.play()
   }
   pause() {
-    this.playList[this.currentTrackIndex].pause()
+    this.playList[this.currentTrackIndex].audioElement.pause()
   }
   stop() {
-    this.playList[this.currentTrackIndex].pause()
-    this.playList[this.currentTrackIndex].currentTime = 0.0
+    this.playList[this.currentTrackIndex].audioElement.pause()
+    this.playList[this.currentTrackIndex].audioElement.currentTime = 0.0
   }
   playNextTrack() {
-    if (this.playList[this.currentTrackIndex + 1]) {
-      this.stop()
-      this.currentTrackIndex++
-      this.play()
-    } else {
-      console.log("No more songs in the list")
-    }
+    this.stop()
+    this.currentTrackIndex++
+    this.play()
   }
   playPreviousTrack() {
-    if (this.playList[this.currentTrackIndex - 1]) {
-      this.stop()
-      this.currentTrackIndex--
-      this.play()
-    } else {
-      console.log("No more songs in the list")
-    }
+    this.stop()
+    this.currentTrackIndex--
+    this.play()
+  }
+  get isNextTrackAvailable() {
+    return this.playList[this.currentTrackIndex + 1]
+  }
+  get isPrevTrackAvailable() {
+    return this.playList[this.currentTrackIndex - 1]
   }
   get duration() {
-    return this.playList[this.currentTrackIndex].duration
+    return this.playList[this.currentTrackIndex].trackDuration!
   }
   get isPaused() {
-    return this.playList[this.currentTrackIndex].paused
+    return this.playList[this.currentTrackIndex].audioElement.paused
+  }
+  get artistName() {
+    return this.playList[this.currentTrackIndex].artistName
+  }
+  get songName() {
+    return this.playList[this.currentTrackIndex].songName
+  }
+  get songId() {
+    return this.playList[this.currentTrackIndex].id
   }
   setVolume(volumeLevel: number) {
-    this.playList[this.currentTrackIndex].volume = volumeLevel / 100
+    this.playList[this.currentTrackIndex].audioElement.volume =
+      volumeLevel / 100
   }
 }

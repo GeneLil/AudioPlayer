@@ -26,10 +26,16 @@
     text-align: center;
 }
 .favourite-heart {
-    background: url("../icons/heart.svg") center no-repeat;
+    background: url("../icons/heart_empty.svg") center no-repeat;
     background-size: contain;
+    cursor: pointer;
     height: 32px;
     width: 32px;
+}
+.favourite-heart.filled {
+    background: url("../icons/heart_filled.svg") center no-repeat;
+    background-size: contain;
+    cursor: default;
 }
 .player-container {
     background: url("../icons/background.png") center no-repeat;

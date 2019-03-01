@@ -1,10 +1,12 @@
 import { Component } from "./Component"
 import { Audio } from "./Audio"
 import { ProgressBar } from "./ProgressBar"
+import { Favourite } from "./Favourite"
 
 export class Controls extends Component {
   constructor(
     private audio: Audio,
+    private favourite: Favourite,
     private progressBar: ProgressBar,
     rootElement: HTMLDivElement
   ) {
@@ -45,12 +47,22 @@ export class Controls extends Component {
     }
   }
   playNextTrack() {
-    this.audio.playNextTrack()
-    this.progressBar.resetProgress()
+    if (this.audio.isNextTrackAvailable) {
+      this.audio.playNextTrack()
+      this.progressBar.resetProgress()
+      this.favourite.setFavouriteStatus()
+    } else {
+      console.log("No more songs in the list")
+    }
   }
   playPreviousTrack() {
-    this.audio.playPreviousTrack()
-    this.progressBar.resetProgress()
+    if (this.audio.isPrevTrackAvailable) {
+      this.audio.playPreviousTrack()
+      this.progressBar.resetProgress()
+      this.favourite.setFavouriteStatus()
+    } else {
+      console.log("No more songs in the list")
+    }
   }
   render() {
     this.element.innerHTML = `
